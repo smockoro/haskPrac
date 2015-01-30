@@ -1,4 +1,13 @@
-mport Control.Applicative
+module ABC3-C where 
+
+-- | テスト内容を記述
+--
+-- >>> main
+-- 2 2
+-- 1000 1500
+-- 1000
+--
+import Control.Applicative
 import Data.List
 
 main = do   
