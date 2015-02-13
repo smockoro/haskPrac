@@ -88,8 +88,21 @@ logfold xs acc
 pluslogfold acc x = do
         tell [" + " ++ show x]
         return(acc + x)
+--msc :: Ord a => [a] -> Int
+msc xs = maximum [scount z zs | z:zs <- tails' xs]
+scount x xs = length $ fst $ runWriter (filterM (comp' x) xs)
+scountlog x xs = mapM_ putStrLn $ snd  $ runWriter (filterM (comp' x) xs)
 
+tails' [] = []
+tails' (x:xs) = (x:xs):tails' xs 
 
-        
+comp' x y 
+    | x >= y = do
+        tell [ show x ++ " is greater than or equal to " ++ show y ]
+        return False
+    | x < y = do
+        tell [ show x ++ " is less than " ++ show y ]
+        return True
 
+table xs = [(z, scount z zs) | z:zs <- tails' xs]
 
